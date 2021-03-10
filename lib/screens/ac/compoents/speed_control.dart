@@ -36,7 +36,7 @@ class _SpeedControlState extends State<SpeedControl> {
                   .map((i) => NumberButton(
                         number: i,
                         isSelected: selectedSpeed == i,
-                        onTap: () {
+                        onTap: (i) {
                           setState(() {
                             selectedSpeed = i;
                           });

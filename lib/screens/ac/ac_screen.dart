@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';
-import '../../widget_utils.dart';
+import 'compoents/conditioner_mode.dart';
 import 'compoents/power_control.dart';
 import 'compoents/speed_control.dart';
 import 'compoents/temp_slider.dart';
@@ -16,34 +16,30 @@ class ACScreen extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text('Smart AC'),
-        leading: Icon(Icons.arrow_back_ios),
+        title: Text(
+          'Smart AC',
+          style: Theme.of(context)
+              .textTheme
+              .bodyText1
+              .copyWith(color: Colors.black),
+        ),
+        leading: Row(
+          children: [
+            SizedBox(width: 8),
+            BackButton(color: Colors.black),
+          ],
+        ),
         elevation: 0,
         backgroundColor: Colors.transparent,
-        toolbarHeight: 90,
+        toolbarHeight: 92,
+        centerTitle: true,
       ),
       body: Container(
         decoration: gradientDecoration,
         child: SafeArea(
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  RoundedIconButton(
-                    icon: Icon(Icons.lock_clock),
-                  ),
-                  RoundedIconButton(
-                    icon: Icon(Icons.ac_unit),
-                  ),
-                  RoundedIconButton(
-                    icon: Icon(Icons.wb_sunny_outlined),
-                  ),
-                  RoundedIconButton(
-                    icon: Icon(Icons.wb_cloudy_outlined),
-                  ),
-                ],
-              ),
+              ConditionerMode(),
               Expanded(
                 child: Text('text'),
               ),
@@ -68,19 +64,5 @@ class ACScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class RoundedIconButton extends StatelessWidget {
-  const RoundedIconButton({
-    Key key,
-    @required this.icon,
-  }) : super(key: key);
-
-  final Icon icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return wrapInCard(context, widget: icon, padding: defaultPadding + 4);
   }
 }
