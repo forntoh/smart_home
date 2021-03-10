@@ -49,14 +49,14 @@ class ACScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: defaultPadding),
                 child: Container(
-                  height: 94,
+                  height: 88,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      PowerControl(),
-                      SizedBox(width: defaultPadding),
                       SpeedControl(),
+                      SizedBox(width: defaultPadding),
+                      PowerControl(),
                     ],
                   ),
                 ),

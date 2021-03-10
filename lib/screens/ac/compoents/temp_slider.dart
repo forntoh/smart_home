@@ -1,12 +1,22 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 import '../../../widget_utils.dart';
 
-class TemperatureSlider extends StatelessWidget {
+class TemperatureSlider extends StatefulWidget {
   const TemperatureSlider({
     Key key,
   }) : super(key: key);
+
+  @override
+  _TemperatureSliderState createState() => _TemperatureSliderState();
+}
+
+class _TemperatureSliderState extends State<TemperatureSlider> {
+  double _currentTemp = 18;
+  int min = 16;
+  int max = 30;
 
   @override
   Widget build(BuildContext context) {
@@ -23,15 +33,21 @@ class TemperatureSlider extends StatelessWidget {
                   Text('Temp'),
                   Row(
                     children: [
-                      Text('18 C'),
+                      Text('$min°C'),
                       Expanded(
                         child: Slider(
-                          value: 20,
-                          max: 30,
-                          min: 16,
+                          activeColor: Colors.white,
+                          value: _currentTemp,
+                          max: max.toDouble(),
+                          min: min.toDouble(),
+                          onChanged: (double value) {
+                            setState(() {
+                              _currentTemp = value;
+                            });
+                          },
                         ),
                       ),
-                      Text('30 C'),
+                      Text('$max°C'),
                     ],
                   ),
                 ],
