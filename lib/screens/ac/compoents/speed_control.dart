@@ -15,12 +15,6 @@ class SpeedControl extends StatefulWidget {
 class _SpeedControlState extends State<SpeedControl> {
   int selectedSpeed = 1;
 
-  void onSpeedChange(i) {
-    setState(() {
-      selectedSpeed = i;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -36,23 +30,17 @@ class _SpeedControlState extends State<SpeedControl> {
             Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                NumberButton(
-                  number: 1,
-                  isSelected: selectedSpeed == 1,
-                  onTap: onSpeedChange,
-                ),
-                NumberButton(
-                  number: 2,
-                  isSelected: selectedSpeed == 2,
-                  onTap: onSpeedChange,
-                ),
-                NumberButton(
-                  number: 3,
-                  isSelected: selectedSpeed == 3,
-                  onTap: onSpeedChange,
-                ),
-              ],
+              children: [1, 2, 3]
+                  .map((i) => NumberButton(
+                        number: i,
+                        isSelected: selectedSpeed == i,
+                        onTap: () {
+                          setState(() {
+                            selectedSpeed = i;
+                          });
+                        },
+                      ))
+                  .toList(),
             ),
           ],
         ),
