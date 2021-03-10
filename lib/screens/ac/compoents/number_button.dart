@@ -22,7 +22,15 @@ class NumberButton extends StatelessWidget {
         width: 32,
         height: 32,
         child: Container(
-          child: Center(child: Text("$number")),
+          child: Center(
+            child: Text(
+              "$number",
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  .apply(color: isSelected ? Colors.black : Colors.white),
+            ),
+          ),
           decoration: BoxDecoration(
             color: isSelected ? Colors.white : Colors.transparent,
             borderRadius: BorderRadius.circular(16),

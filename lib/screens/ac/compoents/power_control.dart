@@ -23,7 +23,10 @@ class _PowerControlState extends State<PowerControl> {
         widget: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Power'),
+            Text(
+              'Power',
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
             Spacer(),
             Row(
               children: [

@@ -29,7 +29,10 @@ class _SpeedControlState extends State<SpeedControl> {
         widget: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Speed'),
+            Text(
+              'Speed',
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
             Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

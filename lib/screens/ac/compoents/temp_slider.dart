@@ -30,7 +30,10 @@ class _TemperatureSliderState extends State<TemperatureSlider> {
               widget: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Temp'),
+                  Text(
+                    'Temp',
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
                   Row(
                     children: [
                       Text('$min°C'),
