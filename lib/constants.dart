@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-double defaultPadding = 20.0;
+const double defaultPadding = 20.0;
 Color primaryColor = Color(0xFF4B29AC);
 Color accentColor = Color(0xFFFF5A59);
 

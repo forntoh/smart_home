@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_home/constants.dart';
 
 import '../../../widget_utils.dart';
 import 'number_button.dart';
@@ -20,6 +21,7 @@ class _SpeedControlState extends State<SpeedControl> {
     return Expanded(
       child: wrapInCard(
         context,
+        padding: defaultPadding - 4,
         widget: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

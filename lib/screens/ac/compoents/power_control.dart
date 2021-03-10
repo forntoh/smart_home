@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../constants.dart';
 import '../../../widget_utils.dart';
 
 class PowerControl extends StatefulWidget {
@@ -20,6 +21,7 @@ class _PowerControlState extends State<PowerControl> {
     return Expanded(
       child: wrapInCard(
         context,
+        padding: defaultPadding - 4,
         widget: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

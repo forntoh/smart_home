@@ -27,6 +27,7 @@ class _TemperatureSliderState extends State<TemperatureSlider> {
           Expanded(
             child: wrapInCard(
               context,
+              padding: defaultPadding - 4,
               widget: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

@@ -28,7 +28,7 @@ class ACScreen extends StatelessWidget {
           child: Column(
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   RoundedIconButton(
                     icon: Icon(Icons.lock_clock),
@@ -50,7 +50,7 @@ class ACScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: defaultPadding),
                 child: Container(
-                  height: 88,
+                  height: 92,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -81,6 +81,6 @@ class RoundedIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return wrapInCard(context, widget: icon);
+    return wrapInCard(context, widget: icon, padding: defaultPadding + 4);
   }
 }
