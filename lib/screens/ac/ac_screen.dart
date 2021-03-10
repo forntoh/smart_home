@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../constants.dart';
-import 'compoents/conditioner_mode.dart';
-import 'compoents/power_control.dart';
-import 'compoents/speed_control.dart';
-import 'compoents/temp_slider.dart';
+import 'compoents/ac_screen_body.dart';
 
 class ACScreen extends StatelessWidget {
   const ACScreen({
@@ -34,35 +30,7 @@ class ACScreen extends StatelessWidget {
         toolbarHeight: 92,
         centerTitle: true,
       ),
-      body: Container(
-        decoration: gradientDecoration,
-        child: SafeArea(
-          child: Column(
-            children: [
-              ConditionerMode(),
-              Expanded(
-                child: Text('text'),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: defaultPadding),
-                child: Container(
-                  height: 92,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      SpeedControl(),
-                      SizedBox(width: defaultPadding),
-                      PowerControl(),
-                    ],
-                  ),
-                ),
-              ),
-              TemperatureSlider(),
-            ],
-          ),
-        ),
-      ),
+      body: ACScreenBody(),
     );
   }
 }

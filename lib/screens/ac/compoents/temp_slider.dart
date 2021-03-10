@@ -5,18 +5,26 @@ import '../../../constants.dart';
 import '../../../widget_utils.dart';
 
 class TemperatureSlider extends StatefulWidget {
+  final Function onTempChanged;
+
   const TemperatureSlider({
     Key key,
+    @required this.onTempChanged,
   }) : super(key: key);
 
   @override
-  _TemperatureSliderState createState() => _TemperatureSliderState();
+  _TemperatureSliderState createState() =>
+      _TemperatureSliderState(onChanged: onTempChanged);
 }
 
 class _TemperatureSliderState extends State<TemperatureSlider> {
-  double _currentTemp = 18;
   int min = 16;
   int max = 30;
+  double _currentTemp = 16;
+
+  Function onChanged;
+
+  _TemperatureSliderState({this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +55,7 @@ class _TemperatureSliderState extends State<TemperatureSlider> {
                           onChanged: (double value) {
                             setState(() {
                               _currentTemp = value;
+                              onChanged(value);
                             });
                           },
                         ),
