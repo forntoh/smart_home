@@ -20,6 +20,7 @@ class ACScreen extends StatelessWidget {
         leading: Icon(Icons.arrow_back_ios),
         elevation: 0,
         backgroundColor: Colors.transparent,
+        toolbarHeight: 90,
       ),
       body: Container(
         decoration: gradientDecoration,

@@ -21,7 +21,8 @@ class NumberButton extends StatelessWidget {
       child: SizedBox(
         width: 32,
         height: 32,
-        child: Container(
+        child: AnimatedContainer(
+          duration: Duration(milliseconds: 200),
           child: Center(
             child: Text(
               "$number",
@@ -32,7 +33,7 @@ class NumberButton extends StatelessWidget {
             ),
           ),
           decoration: BoxDecoration(
-            color: isSelected ? Colors.white : Colors.transparent,
+            color: isSelected ? Colors.white : Colors.white.withOpacity(0),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: Colors.white38, width: 1),
           ),
