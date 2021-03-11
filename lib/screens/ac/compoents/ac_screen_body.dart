@@ -49,7 +49,14 @@ class _ACScreenBodyState extends State<ACScreenBody> {
                   children: [
                     SpeedControl(),
                     SizedBox(width: defaultPadding),
-                    PowerControl(),
+                    PowerControl(
+                      isOn: _powerdOn,
+                      onSwitched: (bool isChecked) {
+                        setState(() {
+                          _powerdOn = isChecked;
+                        });
+                      },
+                    ),
                   ],
                 ),
               ),

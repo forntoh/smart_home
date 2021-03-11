@@ -4,17 +4,15 @@ import 'package:flutter/material.dart';
 import '../../../constants.dart';
 import '../../../widget_utils.dart';
 
-class PowerControl extends StatefulWidget {
+class PowerControl extends StatelessWidget {
+  final bool isOn;
+  final Function onSwitched;
+
   const PowerControl({
     Key key,
+    @required this.isOn,
+    @required this.onSwitched,
   }) : super(key: key);
-
-  @override
-  _PowerControlState createState() => _PowerControlState();
-}
-
-class _PowerControlState extends State<PowerControl> {
-  bool isOn = true;
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +23,7 @@ class _PowerControlState extends State<PowerControl> {
         widget: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Power',
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
+            Text('Power', style: Theme.of(context).textTheme.bodyText1),
             Spacer(),
             Row(
               children: [
@@ -55,11 +50,7 @@ class _PowerControlState extends State<PowerControl> {
                     activeColor: Colors.white38,
                     trackColor: Colors.white12,
                     value: isOn,
-                    onChanged: (isChecked) {
-                      setState(() {
-                        isOn = isChecked;
-                      });
-                    },
+                    onChanged: onSwitched,
                   ),
                 )
               ],
