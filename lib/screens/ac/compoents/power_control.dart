@@ -52,7 +52,7 @@ class _PowerControlState extends State<PowerControl> {
                 Transform.scale(
                   scale: 0.8,
                   child: CupertinoSwitch(
-                    activeColor: Colors.white12,
+                    activeColor: Colors.white38,
                     trackColor: Colors.white12,
                     value: isOn,
                     onChanged: (isChecked) {

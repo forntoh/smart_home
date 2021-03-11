@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -10,8 +11,14 @@ class TempDisplay extends StatelessWidget {
     @required this.currentTemp,
   }) : super(key: key);
 
+  final double minTemp = 16;
+  final double maxTemp = 30;
   final double currentTemp;
   final double trackWidth = defaultPadding + 4;
+
+  double _getProgress(value) {
+    return ((value - minTemp) / (maxTemp - minTemp));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,48 +33,65 @@ class TempDisplay extends StatelessWidget {
                 child: ClipOval(
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
-                    child: Container(
-                      color: Colors.white38,
+                    child: Container(color: Colors.white38),
+                  ),
+                ),
+              ),
+            ),
+            Positioned.fill(
+              child: Transform.rotate(
+                angle: pi,
+                child: CustomPaint(
+                  painter: TempDisplayPainter(_getProgress(currentTemp)),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(trackWidth),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color:
+                              Theme.of(context).primaryColor.withOpacity(0.6),
+                          blurRadius: defaultPadding,
+                          offset: Offset(0, defaultPadding + 10),
+                          spreadRadius: 6,
+                        )
+                      ]),
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(width: 8),
+                        Text(
+                          '${currentTemp.toInt()}',
+                          style: Theme.of(context).textTheme.headline2,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 12),
+                          child: Text(
+                            '°C',
+                            style: Theme.of(context).textTheme.caption,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ),
             ),
-            Positioned(
-              left: trackWidth,
-              right: trackWidth,
-              top: trackWidth,
-              bottom: trackWidth,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(300),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Theme.of(context).primaryColor.withOpacity(0.45),
-                        blurRadius: defaultPadding,
-                        offset: Offset(0, defaultPadding),
-                        spreadRadius: 4,
-                      )
-                    ]),
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(width: 8),
-                      Text(
-                        '${currentTemp.toInt()}',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 8.0),
-                        child: Text(
-                          '°C',
-                          style: Theme.of(context).textTheme.caption,
-                        ),
-                      ),
-                    ],
+            Positioned.fill(
+              child: Transform.rotate(
+                angle: pi,
+                child: Padding(
+                  padding: EdgeInsets.all(trackWidth + 8),
+                  child: CustomPaint(
+                    painter: DotPainter(_getProgress(currentTemp)),
                   ),
                 ),
               ),
@@ -76,5 +100,69 @@ class TempDisplay extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class TempDisplayPainter extends CustomPainter {
+  double progress;
+
+  TempDisplayPainter(
+    this.progress,
+  );
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    double theta = progress * pi;
+
+    double centerX = size.width / 2;
+    double centerY = size.height / 2;
+
+    Offset center = Offset(centerX, centerY);
+
+    canvas.drawArc(
+        Rect.fromCircle(center: center, radius: size.width / 2),
+        0,
+        theta,
+        true,
+        Paint()
+          ..color = primaryColor
+          ..strokeWidth = defaultPadding + 4);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
+}
+
+class DotPainter extends CustomPainter {
+  double progress;
+
+  DotPainter(
+    this.progress,
+  );
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    double theta = progress * pi;
+
+    double centerX = size.width / 2;
+    double centerY = size.height / 2;
+
+    double dotX = cos(theta) * centerX + centerX;
+    double dotY = sin(theta) * centerY + centerY;
+
+    Offset top = Offset(dotX, dotY);
+
+    canvas.drawCircle(
+      top,
+      3,
+      Paint()..color = primaryColor,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
   }
 }

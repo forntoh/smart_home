@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomTypography {
   static TextTheme textTheme = TextTheme(
       headline1: GoogleFonts.montserrat(fontSize: 96, fontWeight: FontWeight.bold, color: Colors.black),
-      headline2: GoogleFonts.montserrat(fontSize: 60, fontWeight: FontWeight.bold, color: Colors.black),
+      headline2: GoogleFonts.montserrat(fontSize: 60, fontWeight: FontWeight.w500, color: Colors.black),
       headline3: GoogleFonts.montserrat(fontSize: 48, fontWeight: FontWeight.w500, color: Colors.black),
       headline4: GoogleFonts.montserrat(fontSize: 34, fontWeight: FontWeight.bold, color: Colors.black),
       headline5: GoogleFonts.montserrat(fontSize: 24, fontWeight: FontWeight.bold),
