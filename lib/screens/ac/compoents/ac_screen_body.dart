@@ -18,6 +18,15 @@ class ACScreenBody extends StatefulWidget {
 
 class _ACScreenBodyState extends State<ACScreenBody> {
   double _currentTemp = 16;
+  int _currentSpeed = 1;
+  bool _powerdOn = false;
+
+  double _maxTemp = 30;
+  double _minTemp = 16;
+
+  double _getProgress(value) {
+    return ((value - _minTemp) / (_maxTemp - _minTemp));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +55,9 @@ class _ACScreenBodyState extends State<ACScreenBody> {
               ),
             ),
             TemperatureSlider(
+              minTemp: _minTemp,
+              maxTemp: _maxTemp,
+              currentTemp: _currentTemp,
               onTempChanged: (double temp) {
                 setState(() {
                   _currentTemp = temp;

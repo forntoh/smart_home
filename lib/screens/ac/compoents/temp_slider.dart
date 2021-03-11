@@ -4,27 +4,19 @@ import 'package:flutter/material.dart';
 import '../../../constants.dart';
 import '../../../widget_utils.dart';
 
-class TemperatureSlider extends StatefulWidget {
+class TemperatureSlider extends StatelessWidget {
   final Function onTempChanged;
+  final double maxTemp;
+  final double minTemp;
+  final double currentTemp;
 
   const TemperatureSlider({
     Key key,
     @required this.onTempChanged,
+    @required this.maxTemp,
+    @required this.minTemp,
+    @required this.currentTemp,
   }) : super(key: key);
-
-  @override
-  _TemperatureSliderState createState() =>
-      _TemperatureSliderState(onChanged: onTempChanged);
-}
-
-class _TemperatureSliderState extends State<TemperatureSlider> {
-  int min = 16;
-  int max = 30;
-  double _currentTemp = 16;
-
-  Function onChanged;
-
-  _TemperatureSliderState({this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -39,28 +31,20 @@ class _TemperatureSliderState extends State<TemperatureSlider> {
               widget: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Temp',
-                    style: Theme.of(context).textTheme.bodyText1,
-                  ),
+                  Text('Temp', style: Theme.of(context).textTheme.bodyText1),
                   Row(
                     children: [
-                      Text('$min°C'),
+                      Text('${minTemp.toInt()}°C'),
                       Expanded(
                         child: Slider(
                           activeColor: Colors.white,
-                          value: _currentTemp,
-                          max: max.toDouble(),
-                          min: min.toDouble(),
-                          onChanged: (double value) {
-                            setState(() {
-                              _currentTemp = value;
-                              onChanged(value);
-                            });
-                          },
+                          value: currentTemp,
+                          max: maxTemp,
+                          min: minTemp,
+                          onChanged: onTempChanged,
                         ),
                       ),
-                      Text('$max°C'),
+                      Text('${maxTemp.toInt()}°C'),
                     ],
                   ),
                 ],
