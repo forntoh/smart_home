@@ -20,7 +20,7 @@ class _ACScreenBodyState extends State<ACScreenBody> {
   double _currentTemp = 23;
   bool _powerdOn = false;
   int _currentSpeed = 1;
-  int _currentItem = 0;
+  int _currentItem = 1;
 
   double _maxTemp = 30;
   double _minTemp = 16;
