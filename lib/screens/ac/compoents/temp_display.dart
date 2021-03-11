@@ -9,23 +9,21 @@ class TempDisplay extends StatelessWidget {
   const TempDisplay({
     Key key,
     @required this.currentTemp,
+    @required this.progress,
+    @required this.mColor,
   }) : super(key: key);
 
-  final double minTemp = 16;
-  final double maxTemp = 30;
+  final double progress;
   final double currentTemp;
   final double trackWidth = defaultPadding + 4;
-
-  double _getProgress(value) {
-    return ((value - minTemp) / (maxTemp - minTemp));
-  }
+  final Color mColor;
 
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 1,
       child: Padding(
-        padding: const EdgeInsets.all(defaultPadding * 3),
+        padding: EdgeInsets.all(defaultPadding * 3),
         child: Stack(
           children: [
             Expanded(
@@ -41,9 +39,8 @@ class TempDisplay extends StatelessWidget {
             Positioned.fill(
               child: Transform.rotate(
                 angle: pi,
-                child: CustomPaint(
-                  painter: TempDisplayPainter(_getProgress(currentTemp)),
-                ),
+                child:
+                    CustomPaint(painter: TempDisplayPainter(progress, mColor)),
               ),
             ),
             Expanded(
@@ -90,9 +87,7 @@ class TempDisplay extends StatelessWidget {
                 angle: pi,
                 child: Padding(
                   padding: EdgeInsets.all(trackWidth + 8),
-                  child: CustomPaint(
-                    painter: DotPainter(_getProgress(currentTemp)),
-                  ),
+                  child: CustomPaint(painter: DotPainter(progress, mColor)),
                 ),
               ),
             ),
@@ -104,11 +99,10 @@ class TempDisplay extends StatelessWidget {
 }
 
 class TempDisplayPainter extends CustomPainter {
-  double progress;
+  final double progress;
+  final Color mColor;
 
-  TempDisplayPainter(
-    this.progress,
-  );
+  TempDisplayPainter(this.progress, this.mColor);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -120,27 +114,23 @@ class TempDisplayPainter extends CustomPainter {
     Offset center = Offset(centerX, centerY);
 
     canvas.drawArc(
-        Rect.fromCircle(center: center, radius: size.width / 2),
-        0,
-        theta,
-        true,
-        Paint()
-          ..color = primaryColor
-          ..strokeWidth = defaultPadding + 4);
+      Rect.fromCircle(center: center, radius: size.width / 2),
+      0,
+      theta,
+      true,
+      Paint()..color = mColor,
+    );
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
-  }
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
 
 class DotPainter extends CustomPainter {
-  double progress;
+  final double progress;
+  final Color mColor;
 
-  DotPainter(
-    this.progress,
-  );
+  DotPainter(this.progress, this.mColor);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -154,15 +144,9 @@ class DotPainter extends CustomPainter {
 
     Offset top = Offset(dotX, dotY);
 
-    canvas.drawCircle(
-      top,
-      3,
-      Paint()..color = primaryColor,
-    );
+    canvas.drawCircle(top, 3, Paint()..color = mColor);
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
-  }
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }

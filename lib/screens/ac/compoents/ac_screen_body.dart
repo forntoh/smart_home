@@ -17,7 +17,7 @@ class ACScreenBody extends StatefulWidget {
 }
 
 class _ACScreenBodyState extends State<ACScreenBody> {
-  double _currentTemp = 16;
+  double _currentTemp = 23;
   int _currentSpeed = 1;
   bool _powerdOn = false;
 
@@ -48,7 +48,11 @@ class _ACScreenBodyState extends State<ACScreenBody> {
           children: [
             ConditionerMode(),
             Expanded(
-              child: TempDisplay(currentTemp: _currentTemp),
+              child: TempDisplay(
+                currentTemp: _currentTemp,
+                progress: _getProgress(_currentTemp),
+                mColor: primaryColor,
+              ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: defaultPadding),
