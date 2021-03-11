@@ -4,17 +4,15 @@ import 'package:smart_home/constants.dart';
 import '../../../widget_utils.dart';
 import 'number_button.dart';
 
-class SpeedControl extends StatefulWidget {
+class SpeedControl extends StatelessWidget {
+  final int currentSpeed;
+  final Function onSpeedChanged;
+
   const SpeedControl({
     Key key,
+    @required this.currentSpeed,
+    @required this.onSpeedChanged,
   }) : super(key: key);
-
-  @override
-  _SpeedControlState createState() => _SpeedControlState();
-}
-
-class _SpeedControlState extends State<SpeedControl> {
-  int selectedSpeed = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -25,22 +23,15 @@ class _SpeedControlState extends State<SpeedControl> {
         widget: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Speed',
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
+            Text('Speed', style: Theme.of(context).textTheme.bodyText1),
             Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [1, 2, 3]
                   .map((i) => NumberButton(
                         number: i,
-                        isSelected: selectedSpeed == i,
-                        onTap: (i) {
-                          setState(() {
-                            selectedSpeed = i;
-                          });
-                        },
+                        isSelected: currentSpeed == i,
+                        onTap: onSpeedChanged,
                       ))
                   .toList(),
             ),

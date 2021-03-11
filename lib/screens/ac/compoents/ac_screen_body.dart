@@ -47,7 +47,14 @@ class _ACScreenBodyState extends State<ACScreenBody> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    SpeedControl(),
+                    SpeedControl(
+                      currentSpeed: _currentSpeed,
+                      onSpeedChanged: (int speed) {
+                        setState(() {
+                          _currentSpeed = speed;
+                        });
+                      },
+                    ),
                     SizedBox(width: defaultPadding),
                     PowerControl(
                       isOn: _powerdOn,
