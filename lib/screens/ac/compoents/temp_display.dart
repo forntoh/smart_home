@@ -52,8 +52,7 @@ class TempDisplay extends StatelessWidget {
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color:
-                              Theme.of(context).primaryColor.withOpacity(0.6),
+                          color: mColor.withOpacity(0.6),
                           blurRadius: defaultPadding,
                           offset: Offset(0, defaultPadding + 10),
                           spreadRadius: 6,

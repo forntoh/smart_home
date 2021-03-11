@@ -24,6 +24,9 @@ class _ACScreenBodyState extends State<ACScreenBody> {
   double _maxTemp = 30;
   double _minTemp = 16;
 
+  double _progress = 0.5;
+  Color _tempColor = getColor(0.5);
+
   double _getProgress(double value) =>
       ((value - _minTemp) / (_maxTemp - _minTemp));
 
@@ -37,7 +40,11 @@ class _ACScreenBodyState extends State<ACScreenBody> {
 
   void _updateTemperature(double temp) => setState(() {
         _currentTemp = temp;
+        _progress = _getProgress(_currentTemp);
+        _tempColor = getColor(_progress);
       });
+
+  List colors = [bgGradientBottom];
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +57,8 @@ class _ACScreenBodyState extends State<ACScreenBody> {
             Expanded(
               child: TempDisplay(
                 currentTemp: _currentTemp,
-                progress: _getProgress(_currentTemp),
-                mColor: primaryColor,
+                progress: _progress,
+                mColor: _tempColor,
               ),
             ),
             Padding(

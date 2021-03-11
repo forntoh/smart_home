@@ -9,7 +9,7 @@ Widget wrapInCard(BuildContext context,
     child: widget,
     decoration: BoxDecoration(
       color: backgroundColor == null
-          ? Theme.of(context).primaryColor.withOpacity(0.2)
+          ? Colors.black.withOpacity(0.08)
           : backgroundColor,
       borderRadius: BorderRadius.all(Radius.circular(defaultPadding)),
     ),
