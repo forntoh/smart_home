@@ -24,9 +24,20 @@ class _ACScreenBodyState extends State<ACScreenBody> {
   double _maxTemp = 30;
   double _minTemp = 16;
 
-  double _getProgress(value) {
-    return ((value - _minTemp) / (_maxTemp - _minTemp));
-  }
+  double _getProgress(double value) =>
+      ((value - _minTemp) / (_maxTemp - _minTemp));
+
+  void _updateFanSpeed(int speed) => setState(() {
+        _currentSpeed = speed;
+      });
+
+  void _updatePowerState(bool isChecked) => setState(() {
+        _powerdOn = isChecked;
+      });
+
+  void _updateTemperature(double temp) => setState(() {
+        _currentTemp = temp;
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -42,27 +53,19 @@ class _ACScreenBodyState extends State<ACScreenBody> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: defaultPadding),
               child: Container(
-                height: 92,
+                height: 96,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     SpeedControl(
                       currentSpeed: _currentSpeed,
-                      onSpeedChanged: (int speed) {
-                        setState(() {
-                          _currentSpeed = speed;
-                        });
-                      },
+                      onSpeedChanged: _updateFanSpeed,
                     ),
                     SizedBox(width: defaultPadding),
                     PowerControl(
                       isOn: _powerdOn,
-                      onSwitched: (bool isChecked) {
-                        setState(() {
-                          _powerdOn = isChecked;
-                        });
-                      },
+                      onSwitched: _updatePowerState,
                     ),
                   ],
                 ),
@@ -72,11 +75,7 @@ class _ACScreenBodyState extends State<ACScreenBody> {
               minTemp: _minTemp,
               maxTemp: _maxTemp,
               currentTemp: _currentTemp,
-              onTempChanged: (double temp) {
-                setState(() {
-                  _currentTemp = temp;
-                });
-              },
+              onTempChanged: _updateTemperature,
             ),
           ],
         ),
