@@ -22,10 +22,10 @@ class ConditionerMode extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Icons.lock_clock,
-          Icons.ac_unit,
-          Icons.wb_sunny_outlined,
-          Icons.wb_cloudy_outlined,
+          'assets/icons/001-clock.svg',
+          'assets/icons/003-snowflake.svg',
+          'assets/icons/004-sun.svg',
+          'assets/icons/002-drop.svg',
         ]
             .asMap()
             .entries

@@ -115,6 +115,14 @@ class TempDisplayPainter extends CustomPainter {
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: size.width / 2),
       0,
+      pi,
+      true,
+      Paint()..color = Colors.white38,
+    );
+
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: size.width / 2),
+      0,
       theta,
       true,
       Paint()..color = mColor,

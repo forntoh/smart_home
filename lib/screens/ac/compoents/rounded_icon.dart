@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../constants.dart';
 import '../../../widget_utils.dart';
@@ -12,7 +13,7 @@ class RoundedIconButton extends StatelessWidget {
     this.tempColor,
   }) : super(key: key);
 
-  final IconData icon;
+  final String icon;
   final isSelected;
   final Function onTap;
   final Color tempColor;
@@ -24,8 +25,10 @@ class RoundedIconButton extends StatelessWidget {
         onTap: onTap,
         child: wrapInCard(
           context,
-          widget: Icon(
+          widget: SvgPicture.asset(
             icon,
+            width: 24,
+            height: 24,
             color: isSelected ? Colors.black : Colors.white,
           ),
           padding: defaultPadding + 4,
