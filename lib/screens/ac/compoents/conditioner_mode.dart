@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import '../../../constants.dart';
 import '../../../widget_utils.dart';
 
-class ConditionerMode extends StatefulWidget {
+class ConditionerMode extends StatelessWidget {
+  final Function onTap;
+  final Color tempColor;
+  final int selectedItem;
+
   const ConditionerMode({
     Key key,
+    @required this.onTap,
+    @required this.tempColor,
+    @required this.selectedItem,
   }) : super(key: key);
-
-  @override
-  _ConditionerModeState createState() => _ConditionerModeState();
-}
-
-class _ConditionerModeState extends State<ConditionerMode> {
-  int _selectedItem = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +31,11 @@ class _ConditionerModeState extends State<ConditionerMode> {
             .entries
             .map((item) => RoundedIconButton(
                   icon: item.value,
-                  isSelected: _selectedItem == item.key,
+                  isSelected: selectedItem == item.key,
                   onTap: () {
-                    setState(() {
-                      _selectedItem = item.key;
-                    });
+                    onTap(item.key);
                   },
+                  tempColor: tempColor,
                 ))
             .toList(),
       ),
@@ -50,25 +49,27 @@ class RoundedIconButton extends StatelessWidget {
     @required this.icon,
     this.isSelected = false,
     this.onTap,
+    this.tempColor,
   }) : super(key: key);
 
   final IconData icon;
   final isSelected;
   final Function onTap;
+  final Color tempColor;
 
   @override
   Widget build(BuildContext context) {
+    var bgColor = isSelected ? Colors.white : tempColor.withOpacity(0.4);
     return InkWell(
-      onTap: onTap,
-      child: wrapInCard(context,
+        onTap: onTap,
+        child: wrapInCard(
+          context,
           widget: Icon(
             icon,
             color: isSelected ? Colors.black : Colors.white,
           ),
           padding: defaultPadding + 4,
-          backgroundColor: isSelected
-              ? Colors.white
-              : Theme.of(context).primaryColor.withOpacity(0.2)),
-    );
+          backgroundColor: bgColor,
+        ));
   }
 }

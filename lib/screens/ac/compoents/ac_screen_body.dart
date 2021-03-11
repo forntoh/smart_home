@@ -18,17 +18,22 @@ class ACScreenBody extends StatefulWidget {
 
 class _ACScreenBodyState extends State<ACScreenBody> {
   double _currentTemp = 23;
-  int _currentSpeed = 1;
   bool _powerdOn = false;
+  int _currentSpeed = 1;
+  int _currentItem = 0;
 
   double _maxTemp = 30;
   double _minTemp = 16;
 
   double _progress = 0.5;
-  Color _tempColor = getColor(0.5);
+  Color _temperatureTint = getColor(0.5);
 
   double _getProgress(double value) =>
       ((value - _minTemp) / (_maxTemp - _minTemp));
+
+  void _updateSelectedItem(int item) => setState(() {
+        _currentItem = item;
+      });
 
   void _updateFanSpeed(int speed) => setState(() {
         _currentSpeed = speed;
@@ -41,24 +46,35 @@ class _ACScreenBodyState extends State<ACScreenBody> {
   void _updateTemperature(double temp) => setState(() {
         _currentTemp = temp;
         _progress = _getProgress(_currentTemp);
-        _tempColor = getColor(_progress);
+        _temperatureTint = getColor(_progress);
       });
-
-  List colors = [bgGradientBottom];
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: gradientDecoration,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            _temperatureTint.withOpacity(0.1),
+            _temperatureTint,
+          ],
+        ),
+      ),
       child: SafeArea(
         child: Column(
           children: [
-            ConditionerMode(),
+            ConditionerMode(
+              onTap: _updateSelectedItem,
+              selectedItem: _currentItem,
+              tempColor: _temperatureTint,
+            ),
             Expanded(
               child: TempDisplay(
                 currentTemp: _currentTemp,
                 progress: _progress,
-                mColor: _tempColor,
+                mColor: _temperatureTint,
               ),
             ),
             Padding(

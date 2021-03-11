@@ -20,17 +20,6 @@ Color getColor(double progress) {
     return bgGradientBottom;
 }
 
-BoxDecoration gradientDecoration = BoxDecoration(
-  gradient: LinearGradient(
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
-    colors: [
-      bgGradientBottom.withOpacity(0.1),
-      bgGradientBottom,
-    ],
-  ),
-);
-
 double mapToRange(
     double value, double start, double end, double oldStart, double oldEnd) {
   var oldRange = (oldEnd - oldStart);
