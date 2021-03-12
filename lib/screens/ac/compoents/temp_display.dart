@@ -26,7 +26,7 @@ class TempDisplay extends StatelessWidget {
         padding: EdgeInsets.all(defaultPadding * 3),
         child: Stack(
           children: [
-            Expanded(
+            Positioned.fill(
               child: Container(
                 child: ClipOval(
                   child: BackdropFilter(
@@ -43,7 +43,7 @@ class TempDisplay extends StatelessWidget {
                     CustomPaint(painter: TempDisplayPainter(progress, mColor)),
               ),
             ),
-            Expanded(
+            Positioned.fill(
               child: Padding(
                 padding: EdgeInsets.all(trackWidth),
                 child: Container(

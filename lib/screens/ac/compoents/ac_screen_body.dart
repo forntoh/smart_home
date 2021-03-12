@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_home/screens/ac/compoents/clouds_video_player.dart';
 
 import '../../../constants.dart';
 import 'conditioner_mode.dart';
@@ -62,50 +63,57 @@ class _ACScreenBodyState extends State<ACScreenBody> {
           ],
         ),
       ),
-      child: SafeArea(
-        child: Column(
-          children: [
-            ConditionerMode(
-              onTap: _updateSelectedItem,
-              selectedItem: _currentItem,
-              tempColor: _temperatureTint,
-            ),
-            Expanded(
-              child: TempDisplay(
-                currentTemp: _currentTemp,
-                progress: _progress,
-                mColor: _temperatureTint,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: defaultPadding),
-              child: Container(
-                height: 96,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    SpeedControl(
-                      currentSpeed: _currentSpeed,
-                      onSpeedChanged: _updateFanSpeed,
-                    ),
-                    SizedBox(width: defaultPadding),
-                    PowerControl(
-                      isOn: _powerdOn,
-                      onSwitched: _updatePowerState,
-                    ),
-                  ],
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: CloudsVideo(speed: _currentSpeed),
+          ),
+          SafeArea(
+            child: Column(
+              children: [
+                ConditionerMode(
+                  onTap: _updateSelectedItem,
+                  selectedItem: _currentItem,
+                  tempColor: _temperatureTint,
                 ),
-              ),
+                Expanded(
+                  child: TempDisplay(
+                    currentTemp: _currentTemp,
+                    progress: _progress,
+                    mColor: _temperatureTint,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: defaultPadding),
+                  child: Container(
+                    height: 96,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        SpeedControl(
+                          currentSpeed: _currentSpeed,
+                          onSpeedChanged: _updateFanSpeed,
+                        ),
+                        SizedBox(width: defaultPadding),
+                        PowerControl(
+                          isOn: _powerdOn,
+                          onSwitched: _updatePowerState,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                TemperatureSlider(
+                  minTemp: _minTemp,
+                  maxTemp: _maxTemp,
+                  currentTemp: _currentTemp,
+                  onTempChanged: _updateTemperature,
+                ),
+              ],
             ),
-            TemperatureSlider(
-              minTemp: _minTemp,
-              maxTemp: _maxTemp,
-              currentTemp: _currentTemp,
-              onTempChanged: _updateTemperature,
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
