@@ -7,18 +7,20 @@ import '../../../widget_utils.dart';
 class PowerControl extends StatelessWidget {
   final bool isOn;
   final Function onSwitched;
+  final Color tempColor;
 
   const PowerControl({
     Key key,
     @required this.isOn,
     @required this.onSwitched,
+    @required this.tempColor,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: wrapInCard(
-        context,
+        backgroundColor: tempColor.withOpacity(0.5),
         padding: defaultPadding - 4,
         widget: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

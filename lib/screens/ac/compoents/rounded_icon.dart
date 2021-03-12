@@ -24,7 +24,6 @@ class RoundedIconButton extends StatelessWidget {
     return InkWell(
         onTap: onTap,
         child: wrapInCard(
-          context,
           widget: SvgPicture.asset(
             icon,
             width: 24,

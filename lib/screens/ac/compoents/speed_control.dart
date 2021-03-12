@@ -7,18 +7,20 @@ import 'number_button.dart';
 class SpeedControl extends StatelessWidget {
   final int currentSpeed;
   final Function onSpeedChanged;
+  final Color tempColor;
 
   const SpeedControl({
     Key key,
     @required this.currentSpeed,
     @required this.onSpeedChanged,
+    @required this.tempColor,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: wrapInCard(
-        context,
+        backgroundColor: tempColor.withOpacity(0.5),
         padding: defaultPadding - 4,
         widget: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -25,7 +25,7 @@ class _CloudsVideoState extends State<CloudsVideo> {
   Widget build(BuildContext context) {
     return Container(
       child: Opacity(
-        opacity: 0.4,
+        opacity: 0.5,
         child: image == null
             ? FutureBuilder<ui.Image>(
                 future: makeImage(MediaQuery.of(context).size, 1337),

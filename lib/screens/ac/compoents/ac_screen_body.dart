@@ -94,11 +94,13 @@ class _ACScreenBodyState extends State<ACScreenBody> {
                         SpeedControl(
                           currentSpeed: _currentSpeed,
                           onSpeedChanged: _updateFanSpeed,
+                          tempColor: _temperatureTint,
                         ),
                         SizedBox(width: defaultPadding),
                         PowerControl(
                           isOn: _powerdOn,
                           onSwitched: _updatePowerState,
+                          tempColor: _temperatureTint,
                         ),
                       ],
                     ),
@@ -109,6 +111,7 @@ class _ACScreenBodyState extends State<ACScreenBody> {
                   maxTemp: _maxTemp,
                   currentTemp: _currentTemp,
                   onTempChanged: _updateTemperature,
+                  tempColor: _temperatureTint,
                 ),
               ],
             ),

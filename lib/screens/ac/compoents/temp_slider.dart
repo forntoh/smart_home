@@ -9,6 +9,7 @@ class TemperatureSlider extends StatelessWidget {
   final double maxTemp;
   final double minTemp;
   final double currentTemp;
+  final Color tempColor;
 
   const TemperatureSlider({
     Key key,
@@ -16,6 +17,7 @@ class TemperatureSlider extends StatelessWidget {
     @required this.maxTemp,
     @required this.minTemp,
     @required this.currentTemp,
+    @required this.tempColor,
   }) : super(key: key);
 
   @override
@@ -26,7 +28,7 @@ class TemperatureSlider extends StatelessWidget {
         children: [
           Expanded(
             child: wrapInCard(
-              context,
+              backgroundColor: tempColor.withOpacity(0.5),
               padding: defaultPadding - 4,
               widget: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
