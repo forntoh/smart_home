@@ -26,8 +26,9 @@ class TempDisplay extends StatelessWidget {
         padding: EdgeInsets.all(defaultPadding * 3),
         child: Stack(
           children: [
-            Positioned.fill(
-              child: Container(
+            Center(
+              child: AspectRatio(
+                aspectRatio: 1,
                 child: ClipOval(
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
@@ -82,11 +83,16 @@ class TempDisplay extends StatelessWidget {
               ),
             ),
             Positioned.fill(
-              child: Transform.rotate(
-                angle: pi,
-                child: Padding(
-                  padding: EdgeInsets.all(trackWidth + 8),
-                  child: CustomPaint(painter: DotPainter(progress, mColor)),
+              child: Center(
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: Transform.rotate(
+                    angle: pi,
+                    child: Padding(
+                      padding: EdgeInsets.all(trackWidth + 8),
+                      child: CustomPaint(painter: DotPainter(progress, mColor)),
+                    ),
+                  ),
                 ),
               ),
             ),
